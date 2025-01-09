@@ -1,16 +1,22 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import LoadingIicon from "../components/loading-icon";
-import { MemeCard } from "@/components/meme-card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useMemes } from "@/lib/hooks/use-memes";
-import { useInView } from "react-intersection-observer";
+import { useEffect } from 'react';
+import LoadingIicon from '../components/loading-icon';
+import { MemeCard } from '@/components/meme-card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useMemes } from '@/lib/hooks/use-memes';
+import { useInView } from 'react-intersection-observer';
 
 export default function MemeList() {
   const { memes, loading, error, fetchMemes } = useMemes();
   const { ref, inView } = useInView();
 
+  // Fetch initial memes when component mounts
+  useEffect(() => {
+    fetchMemes();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Fetch more memes when scrolling to bottom
   useEffect(() => {
     if (inView) {
       fetchMemes();
