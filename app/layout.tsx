@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={`${inter.className} overflow-y-scroll`} suppressHydrationWarning>
         <Providers>{children}</Providers>
       </body>
     </html>
